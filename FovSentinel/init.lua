@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: init.lua
-Version: 2025-11-17, 9:46 UTC+01:00 (MEZ)
+Version: 2025-11-17, 22:25 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -554,7 +554,7 @@ registerForEvent("onDraw", function()
 		ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0)
 		if ImGui.Begin("##FakeWidget", flags) then
 			local frozenFov = getFrozenFOV(true, 0)
-			local currentFov = getFOV(false, true, 0)
+			local currentFov = getFOV(isTPP(), true, 0)
 			local scale = ImGui.GetFontSize() / 18
 			local x, y = ImGui.GetCursorPos()
 
