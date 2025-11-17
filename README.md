@@ -7,7 +7,7 @@ See your real in-game FOV (field of view) and lock it when the game tries to cha
 ## Features
 
 - Frontend only: displays and controls FOV for the player.
-- Powered by [FOV Control](https://www.nexusmods.com/cyberpunk2077/mods/25677): uses its engine-level conversion and lock/unlock functions.
+- Powered by [FOV Control](https://github.com/Si13n7/CP2077-FovControl): uses its engine-level conversion and lock/unlock functions.
 - No automation: it does not change cameras or anything else on its own.
 - Works game-wide; not limited to third-person or a specific camera.
 
@@ -41,9 +41,9 @@ The game changes FOV dynamically, and it does it a lot. With this mod you can se
 
 ## Requirements
 
-- [FOV Control](https://www.nexusmods.com/cyberpunk2077/mods/25677) with all dependencies, including optional ones.
-- [Cyber Engine Tweaks](https://www.nexusmods.com/cyberpunk2077/mods/107).
-- [Codeware](https://www.nexusmods.com/cyberpunk2077/mods/7780) is optional. It displays the precise FOV used by the third-person camera. FOV locking works without it.
+- [FOV Control](https://github.com/Si13n7/CP2077-FovControl) with all dependencies, including optional ones.
+- [Cyber Engine Tweaks](https://github.com/maximegmd/CyberEngineTweaks).
+- [Codeware](https://github.com/psiberx/cp2077-codeware) is optional. It displays the precise FOV used by the third-person camera. FOV locking works without it.
 
 ## Installation
 
