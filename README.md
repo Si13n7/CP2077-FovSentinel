@@ -51,7 +51,7 @@ The game changes FOV dynamically, and it does it a lot. With this mod you can se
 2. Extract this mod into your CET mods folder:
 
 ```
-<GameDir>/bin/x64/plugins/cyber_engine_tweaks/mods/FOVSentinel
+<GameDir>/bin/x64/plugins/cyber_engine_tweaks/mods/FovSentinel
 ```
 
 3. Launch the game.
@@ -64,7 +64,7 @@ When reporting issues, please provide:
 - The following log files:
   ```
   <GameDir>\red4ext\logs\FovControl.log
-  <GameDir>\bin\x64\plugins\cyber_engine_tweaks\mods\FOVSentinel\FOVSentinel.log
+  <GameDir>\bin\x64\plugins\cyber_engine_tweaks\mods\FovSentinel\FovSentinel.log
   ```
 
 ## Notes
