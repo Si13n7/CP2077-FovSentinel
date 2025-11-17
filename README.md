@@ -41,17 +41,17 @@ The game changes FOV dynamically, and it does it a lot. With this mod you can se
 
 ## Requirements
 
-- [FOV Control](https://github.com/Si13n7/CP2077-FovControl) with all dependencies, including optional ones.
+- [FOV Control](https://github.com/Si13n7/CP2077-FovControl) with all dependencies.
 - [Cyber Engine Tweaks](https://github.com/maximegmd/CyberEngineTweaks).
 - [Codeware](https://github.com/psiberx/cp2077-codeware) is optional. It displays the precise FOV used by the third-person camera. FOV locking works without it.
 
 ## Installation
 
 1. Install all requirements listed above.
-2. Extract this mod into your CET mods folder:
+2. Extract the `FovSentinel` folder into your CET mods folder:
 
 ```
-<GameDir>/bin/x64/plugins/cyber_engine_tweaks/mods/FovSentinel
+<GameDir>/bin/x64/plugins/cyber_engine_tweaks/mods/
 ```
 
 3. Launch the game.
