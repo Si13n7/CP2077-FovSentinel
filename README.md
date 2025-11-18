@@ -41,8 +41,8 @@ The game changes FOV dynamically, and it does it a lot. With this mod you can se
 
 ## Requirements
 
+- [Cyber Engine Tweaks](https://github.com/maximegmd/CyberEngineTweaks) as the frontend.
 - [FOV Control](https://github.com/Si13n7/CP2077-FovControl) with all dependencies.
-- [Cyber Engine Tweaks](https://github.com/maximegmd/CyberEngineTweaks).
 - [Codeware](https://github.com/psiberx/cp2077-codeware) is optional. It displays the precise FOV used by the third-person camera. FOV locking works without it.
 
 ## Installation
