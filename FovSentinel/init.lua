@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: init.lua
-Version: 2025-11-17, 22:25 UTC+01:00 (MEZ)
+Version: 2025-11-20, 10:11 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -400,7 +400,7 @@ end
 ---@return number # The updated frozen FOV value, or 0 if the mod is disabled or the FOV is not locked.
 local function updateFrozenFOV()
 	if not mod.isEnabled then return 0 end
-	mod.frozenFov = isFovLocked() and getFOV() or 0
+	mod.frozenFov = isFovLocked() and getFOV(isTPP()) or 0
 	return mod.frozenFov
 end
 
