@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: init.lua
-Version: 2025-11-20, 10:11 UTC+01:00 (MEZ)
+Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -61,6 +61,9 @@ local gui = {
 
 	---If true, the on-screen widget is only shown while the FOV is locked.
 	isWidgetPassive = false,
+
+	---WIP
+	widgetSizeOffset = 0,
 
 	---If true, an on-screen notification is displayed when a hotkey is pressed.
 	areAlertsAllowed = false,
@@ -305,14 +308,18 @@ local function saveSettings()
 		"isWidgetEnabled",
 		"isWidgetPassive",
 		"areAlertsAllowed",
-		"areToastsAllowed"
+		"areToastsAllowed",
+		"widgetSizeOffset"
 	}
 	for _, name in ipairs(settings) do
 		local value = gui[name]
 		if type(value) == "boolean" then
+			value = value and 1 or 0
+		end
+		if type(value) == "number" then
 			sqliteUpsert("Settings", "Name", {
 				Name = name,
-				Value = value and 1 or 0
+				Value = value
 			})
 		end
 	end
@@ -329,8 +336,13 @@ local function loadSettings()
 	)
 	for row in sqliteRows("Settings", "Name, Value") do
 		local name, value = unpack(row)
-		if name and value and type(gui[name]) == "boolean" then
-			gui[name] = value > 0
+		if name and value then
+			local kind = type(gui[name])
+			if kind == "boolean" then
+				gui[name] = value > 0
+			elseif kind == "number" then
+				gui[name] = value
+			end
 		end
 	end
 end
@@ -567,7 +579,7 @@ registerForEvent("onDraw", function()
 					isLocked and 1 or -1,
 				})[#text] or 1
 				ImGui.SetCursorPos(x - 1 + xOffset * scale, y + yOffset * scale)
-				ImGui.SetWindowFontScale(0.7)
+				ImGui.SetWindowFontScale(0.7 + gui.widgetSizeOffset / 100)
 				ImGui.Text(text)
 				ImGui.PopStyleColor()
 			end
@@ -578,7 +590,7 @@ registerForEvent("onDraw", function()
 				drawText(currentFov, 22, 0xab49e6f2)
 			end
 
-			ImGui.SetWindowFontScale(1.0)
+			ImGui.SetWindowFontScale(1.0 + gui.widgetSizeOffset / 100)
 			ImGui.SetCursorPos(x, y)
 
 			ImGui.PushStyleColor(ImGuiCol.Text, 0xabf2e649)
@@ -676,6 +688,16 @@ registerForEvent("onDraw", function()
 		if i < #checkboxes then
 			ImGui.Separator()
 		end
+	end
+
+	ImGui.Separator()
+
+	ImGui.SetNextItemWidth(floor(24 * (ImGui.GetFontSize() / 18)))
+	local wOffset = gui.widgetSizeOffset
+	local result = ImGui.DragInt(Text.GUI_INT_WSIZE, wOffset, 1, 0, 50)
+	if result ~= wOffset and wOffset >= 0 and wOffset <= 50 then
+		gui.widgetSizeOffset = result
+		mod.unsavedSettings = true
 	end
 
 	ImGui.End()

@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: text.lua
-Version: 2025-11-17, 9:46 UTC+01:00 (MEZ)
+Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -36,6 +36,7 @@ return {
 	GUI_CHK_WIDGET_WL = "Widget Only When Locked",
 	GUI_CHK_ALERTS = "Show On-Screen Alerts",
 	GUI_CHK_TOASTS = "Show CET Notifications",
+	GUI_INT_WSIZE = "Widget Size Offset",
 
 	--HK: 🎮 Input & Hotkey
 	HK_LOCK_ON = "Force Lock",

@@ -13,7 +13,7 @@ are already provided by Lua or CET and exist
 only for documentation and coding convenience.
 
 Filename: api.lua
-Version: 2025-11-17, 9:46 UTC+01:00 (MEZ)
+Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -50,6 +50,8 @@ ImGui.Toast = ImGui.Toast
 ---@field TableNextRow fun(row_flags?: integer, min_row_height?: number) # Advances to the next row. Optional: row flags and minimum height in pixels.
 ---@field TableNextColumn fun() # Advances to the next column in the current table row. Resets to column 0 after the last column.
 ---@field EndTable fun() # Ends the creation of the current table. Must always be called after `ImGui.BeginTable()`.
+---@field DragInt fun(label: string, value: integer, speed: integer, min: integer, max: integer): integer # Creates a draggable integer input widget. Returns the new `value`.
+---@field SetNextItemWidth fun(width: number) # Sets a fixed width for the next item (e.g., combo box, slider, or text input). Affects layout and alignment.
 ---@field CalcTextSize fun(text: string): number # Calculates the width of a given text string as it would be displayed using the current font. Returns the width in pixels as a floating-point number.
 ---@field GetWindowPos fun(): number, number # Returns the X and Y position of the current window, relative to the screen.
 ---@field GetWindowSize fun(): number, number # Returns the width and height of the current window in pixels.
