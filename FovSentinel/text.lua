@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: text.lua
-Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
+Version: 2025-12-14, 14:58 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -26,7 +26,7 @@ return {
 	OFF = "Off",
 
 	--GUI: 🚀 Main Controls
-	GUI_INCOMP = "This mod may be incompatible with your system. Contact the mod developer for support.",
+	GUI_INCOMP = "This mod may be incompatible with your system. Please make sure all dependencies are installed and up to date. If the issue persists, contact the mod author for support.",
 	GUI_LBL_LOCK = "Lock State",
 	GUI_LBL_FROZEN = "Frozen FOV",
 	GUI_LBL_FOV = "Display FOV",
@@ -52,7 +52,7 @@ return {
 	LOG_MODULE_INIT = "Module initialized.",
 
 	--LOG: ❌ Errors
-	LOG_MODULE_MISSING = "Module not found!",
+	LOG_MODULE_MISSING = "Module not found or outdated.",
 	LOG_LOCK_FAIL = "Failed to lock the field of view.",
 	LOG_UNLOCK_FAIL = "Failed to unlock the field of view.",
 

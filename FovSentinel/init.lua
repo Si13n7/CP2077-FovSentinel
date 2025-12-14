@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: init.lua
-Version: 2025-12-14, 14:33 UTC+01:00 (MEZ)
+Version: 2025-12-14, 14:58 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -497,7 +497,7 @@ registerForEvent("onInit", function()
 
 	loadSettings()
 
-	mod.isEnabled = FovControl and FovControl.IsPatchingAllowed() or false
+	mod.isEnabled = FovControl and type(FovControl.Version) == "function" and FovControl.IsPatchingAllowed() or false
 	if not mod.isEnabled then
 		error(Text.LOG_MODULE_MISSING)
 		return
