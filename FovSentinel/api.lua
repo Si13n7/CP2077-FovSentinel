@@ -13,7 +13,7 @@ are already provided by Lua or CET and exist
 only for documentation and coding convenience.
 
 Filename: api.lua
-Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
+Version: 2025-12-14, 14:33 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -120,6 +120,7 @@ bit32 = bit32
 ---@class CameraComponent
 ---@field GetFOV fun(self: CameraComponent): number # Returns the current internal field of view (FOV) value used by the camera.
 ---@field GetDisplayFOV fun(self: CameraComponent): number # Returns the display-adjusted field of view (FOV) value shown to the player. Requires `FovControl` to be available.
+---@field IsPendingSchedulerActive fun(): boolean # Returns true if a pending FOV adjustment task is currently running in the background.
 
 ---Represents the player character in the game, providing functions to interact with the player instance.
 ---@class Player
@@ -171,4 +172,5 @@ db = db
 ---@field Unlock fun(): boolean # Removes the patch and restores normal FOV behavior.
 ---@field ToggleLock fun(): boolean # Switches between locked and unlocked states.
 ---@field ConvertFormat fun(fov: number, isSettingsFormat: boolean): number # Converts a FOV value between internal and display (settings) formats. When `isSettingsFormat` is true, converts from internal to display; otherwise, converts from display to internal.
+---@field Version fun(): string # Returns the current version string of the installed FovControl plugin.
 FovControl = FovControl

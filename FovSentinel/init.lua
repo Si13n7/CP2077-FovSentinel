@@ -10,7 +10,7 @@ Allows you to lock the game's field of view
 in-game events or camera scripts.
 
 Filename: init.lua
-Version: 2025-11-20, 11:00 UTC+01:00 (MEZ)
+Version: 2025-12-14, 14:33 UTC+01:00 (MEZ)
 
 Copyright (c) 2025, Si13n7 Developments(tm)
 All rights reserved.
@@ -62,7 +62,7 @@ local gui = {
 	---If true, the on-screen widget is only shown while the FOV is locked.
 	isWidgetPassive = false,
 
-	---WIP
+	---Size offset for the on-screen widget.
 	widgetSizeOffset = 0,
 
 	---If true, an on-screen notification is displayed when a hotkey is pressed.
@@ -378,16 +378,16 @@ local function getCamComp(tpp)
 	return tpp and player:GetTPPCameraComponent() or player:GetFPPCameraComponent()
 end
 
----Retrieves the current field of view (FOV) value.
----@param tpp boolean? # Optional true to read from the third-person camera, false or nil for first-person.
----@param settingsFormat boolean? # Optional  true to return the converted (display) FOV value instead of the internal one.
----@param digits integer? # Optional number of decimal digits for rounding when in display format. Defaults to 3.
----@return number # The current FOV value, or 0 if unavailable.
-local function getFOV(tpp, settingsFormat, digits)
+---Retrieves the current field of view (FOV) value from a given or active camera component.
+---@param comp (CameraComponent|boolean)? # Optional; a camera component instance or `true`/`false` to explicitly select third-person or first-person view. If omitted, the active camera is used automatically.
+---@param settingsFormat boolean? # When true, returns the display FOV value (shown in settings). When false or nil, returns the internal FOV.
+---@param digits number? # Optional number of decimal places to round to. If omitted, returns the raw value.
+---@return number # The current FOV value, rounded if requested, or 0 if unavailable.
+local function getFOV(comp, settingsFormat, digits)
 	if not mod.isEnabled then return 0 end
 
-	local comp = getCamComp(tpp == true)
-	if not comp then return 0 end
+	comp = comp == nil and getCamComp() or type(comp) == "boolean" and getCamComp(comp) or comp
+	if not comp then return 0 end ---@cast comp CameraComponent
 
 	local fov = settingsFormat and comp:GetDisplayFOV() or comp:GetFOV()
 	if fov == 0 then return 0 end
@@ -410,9 +410,9 @@ end
 
 ---Updates the stored frozen field of view (FOV) value based on the current lock mod.
 ---@return number # The updated frozen FOV value, or 0 if the mod is disabled or the FOV is not locked.
-local function updateFrozenFOV()
+local function updateFrozenFOV(force, comp)
 	if not mod.isEnabled then return 0 end
-	mod.frozenFov = isFovLocked() and getFOV(isTPP()) or 0
+	mod.frozenFov = (force or isFovLocked()) and getFOV(comp or isTPP()) or 0
 	return mod.frozenFov
 end
 
@@ -550,7 +550,13 @@ registerForEvent("onDraw", function()
 		return
 	end
 
-	local isLocked = mod.frozenFov ~= 0
+	local tpp = isTPP()
+	local comp = getCamComp(tpp)
+	if comp and comp:IsPendingSchedulerActive() then
+		updateFrozenFOV(true, comp)
+	end
+
+	local isLocked = isFovLocked()
 	if gui.isWidgetEnabled and (not gui.isWidgetPassive or isLocked) then
 		local flags = bor(
 			ImGuiWindowFlags.AlwaysAutoResize,
@@ -636,17 +642,16 @@ registerForEvent("onDraw", function()
 		ImGui.TableSetupColumn("\u{f09a8}", ImGuiTableColumnFlags.WidthStretch)
 		ImGui.TableHeadersRow()
 
-		addTableNextRow(Text.GUI_LBL_LOCK, isFovLocked() and Text.ON or Text.OFF)
+		addTableNextRow(Text.GUI_LBL_LOCK, isLocked and Text.ON or Text.OFF)
 
 		local frozen = getFrozenFOV(true)
 		if isLocked and frozen > 0 then
 			addTableNextRow(Text.GUI_LBL_FROZEN, frozen)
 		end
 
-		local tpp = isTPP()
-		local raw = getFOV(tpp, false, 3)
+		local raw = getFOV(comp, false, 3)
 		if raw > 0 then
-			local fov = getFOV(tpp, true, 3)
+			local fov = getFOV(comp, true, 3)
 			addTableNextRow(Text.GUI_LBL_FOV, fov)
 			addTableNextRow(Text.GUI_LBL_RAW, raw)
 		end
